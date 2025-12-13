@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  # Serwis Bazy Danych
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: tododb
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  # Serwis Aplikacji (Next.js)
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: "postgresql://user:password@postgres:5432/tododb?schema=public"
+    depends_on:
+      - postgres
+
+volumes:
+  pgdata:
