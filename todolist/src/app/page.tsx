@@ -4,6 +4,10 @@ import { addTask } from './crud/addTask'
 import { deleteTask } from './crud/deleteTask'
 import { toggleTaskCompletion } from './crud/updateTask'
 
+// TA LINIJKA NAPRAWIA BŁĄD BUDOWANIA
+// Mówi Next.js: "Renderuj tę stronę dopiero jak serwer wstanie, a nie przy budowaniu"
+export const dynamic = 'force-dynamic'
+
 export default async function Home() {
   const tasks = await getTasks()
 
@@ -11,7 +15,6 @@ export default async function Home() {
     <main className={styles.main}>
       <h1 className={styles.title}>Lista Zadań (Projekt)</h1>
 
-      {/* Formularz dodawania */}
       <form action={addTask} className={styles.form}>
         <input 
           type="text" 
@@ -23,7 +26,6 @@ export default async function Home() {
         <button type="submit" className={styles.button}>Dodaj</button>
       </form>
 
-      {/* Lista zadań */}
       <ul className={styles.list}>
         {tasks.map((task) => (
           <li key={task.id} className={styles.item}>
