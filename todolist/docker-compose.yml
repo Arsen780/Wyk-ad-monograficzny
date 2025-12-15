@@ -1,7 +1,6 @@
 version: '3.8'
 
 services:
-  # Serwis Bazy Danych
   postgres:
     image: postgres:15-alpine
     environment:
@@ -13,7 +12,6 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
 
-  # Serwis Aplikacji (Next.js)
   app:
     build: .
     ports:

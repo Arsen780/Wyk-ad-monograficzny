@@ -13,10 +13,8 @@ RUN npm install
 
 COPY . .
 
-# Generujemy klienta
 RUN npx prisma generate
 
-# Budujemy aplikację
 RUN npm run build
 
 EXPOSE 3000
